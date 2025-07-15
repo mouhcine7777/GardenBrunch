@@ -1,11 +1,20 @@
 "use client";
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+
+interface Smoothie {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  ingredients: string[];
+}
 
 const SmoothiesMenu = () => {
-  const [selectedItems, setSelectedItems] = useState({});
+  const [selectedItems, setSelectedItems] = useState<Record<number, boolean>>({});
 
-  const smoothies = [
+  const smoothies: Smoothie[] = [
     {
       id: 1,
       name: "Passion Coconut",
@@ -56,14 +65,14 @@ const SmoothiesMenu = () => {
     }
   ];
 
-  const toggleItem = (id) => {
+  const toggleItem = (id: number) => {
     setSelectedItems(prev => ({
       ...prev,
       [id]: !prev[id]
     }));
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -74,7 +83,7 @@ const SmoothiesMenu = () => {
     }
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { y: 30, opacity: 0, scale: 0.95 },
     visible: { 
       y: 0, 
